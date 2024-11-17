@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
+import Navbar from "./layouts/header-footer/Navbar";
+import Footer from "./layouts/header-footer/Footer";
+import HomePage from "./layouts/homepage/HomePage";
 
 function App() {
-    return (
-        <div className="App">
-            <nav className='navbar navbar-expand-lg  navbar-dark bg-dark'>
-                <div className='container-fluid'>
-                    <a className='brand' href='#'>TITV.vn</a>
-                </div>
-            </nav>
-
+    return(
+        <div>
+            <Navbar/>
+            <HomePage/>
+            <Footer/>
         </div>
-    );
+    )
 }
 
 export default App;
