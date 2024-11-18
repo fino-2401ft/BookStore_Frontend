@@ -1,9 +1,11 @@
 interface Book {
     id: number;
-    tittle: string;
+    title: string;
     description: string;
     originalPrice: number;
     price: number;
     imageUrl: string;
 
 }
+
+export default Book;
