@@ -1,9 +1,9 @@
-class HinhAnhModel {
+class HinHAnhModel {
     maHinhAnh: number;
     tenHinhAnh?: string;
     laIcon?: boolean;
     duongDan?: string;
-    duLieuAnh?: string;
+    duLieuAnh: string;
 
     constructor(
         maHinhAnh: number,
@@ -20,4 +20,4 @@ class HinhAnhModel {
     }
 }
 
-export default HinhAnhModel;
+export default HinHAnhModel;

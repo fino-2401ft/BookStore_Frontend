@@ -1,6 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { lay3SachMoiNhat, layToanBoSach } from "../../../api/SachAPI";
 
-function Carousel() {
+const Carousel():React.FC = () => 
+{
+    const [danhSachQuyenSach, setDanhSachQuyenSach] = useState<SachModel[]>([]);
+    const [dangTaiDuLieu, setDangTaiDuLieu] = useState<boolean>(true);
+    const [baoLoi, setBaoLoi] = useState(null);
+
+    useEffect(() => {
+        lay3SachMoiNhat().then(
+            sachData => {
+                setDanhSachQuyenSach(sachData);
+                setDangTaiDuLieu(false);
+            }
+        ).catch(
+            error => {
+                setBaoLoi(error.message);
+            }
+        );
+    }, [])
+    
+    if(dangTaiDuLieu) 
+    {
+        return(
+            <div>
+                <h1>LOADING DATA......</h1>
+            </div>
+        );
+    }
+    
+    if(baoLoi) 
+        {
+            return(
+                <div>
+                    <h1>ERROR: {baoLoi}</h1>
+                </div>
+            );
+        }
+
+
     return (
         <div>
             <div id="carouselExampleDark" className="carousel carousel-dark slide">

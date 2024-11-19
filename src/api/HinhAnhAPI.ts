@@ -1,21 +1,23 @@
 import React from "react";
 import HinhAnhModel from "../models/HinhAnhModel";
-import my_request from "./Request";
+import { my_request } from "./my_request";
 
-export async function layToanBoAnhCuaMotSach(maSach: number):Promise<HinhAnhModel[]>
-{
-    const result: HinhAnhModel[] = [];
-    const endpoint: string = `http://localhost:8080/sach/${maSach}/danhSachHinhAnh`;
 
-    // request(endpoint).then().catch();
-    const response = await my_request(endpoint);
-     
-    //Take json sach
+export async function layToanBoAnhCuaMotSach(maSach: number): Promise<HinhAnhModel[]> {
+    const ketQua: HinhAnhModel[] = [];
+
+    // Xác định endpoint
+    const duongDan: string = `http://localhost:8080/sach/${maSach}/danhSachHinhAnh`;
+
+    // Gọi phương thức request
+    const response = await my_request(duongDan);
+
+    // Lấy ra json sach
     const responseData = response._embedded.hinhAnhs;
-    console.log(responseData);
-    
+    // console.log(responseData);
+
     for (const key in responseData) {
-        result.push({
+        ketQua.push({
             maHinhAnh: responseData[key].maHinhAnh,
             tenHinhAnh: responseData[key].tenHinhAnh,
             laIcon: responseData[key].laIcon,
@@ -24,7 +26,5 @@ export async function layToanBoAnhCuaMotSach(maSach: number):Promise<HinhAnhMode
         });
     }
 
-    return result;
+    return ketQua;
 }
-
-export default layToanBoAnhCuaMotSach;

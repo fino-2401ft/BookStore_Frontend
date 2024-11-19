@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import SachModel from "../../models/SachModel";
 import SachProps from "./components/SachProps";
-import { getListBook } from "../../api/SachAPI";
+import { layToanBoSach } from "../../api/SachAPI";
 import { error } from "console";
 
 const DanhSachSanPham: React.FC = () => {
@@ -11,7 +11,7 @@ const DanhSachSanPham: React.FC = () => {
     const [baoLoi, setBaoLoi] = useState(null);
 
     useEffect(() => {
-        getListBook().then(
+        layToanBoSach().then(
             sachData => {
                 setDanhSachQuyenSach(sachData);
                 setDangTaiDuLieu(false);

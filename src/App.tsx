@@ -3,11 +3,11 @@ import './App.css';
 import Navbar from "./layouts/header-footer/Navbar";
 import Footer from "./layouts/header-footer/Footer";
 import HomePage from "./layouts/homepage/HomePage";
-import { getListBook } from './api/SachAPI';
+import { layToanBoSach } from './api/SachAPI';
 
 function App() {
 
-    getListBook().then().catch();
+    layToanBoSach().then().catch();
     return(
         <div>
             <Navbar/>
