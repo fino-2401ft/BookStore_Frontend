@@ -1,4 +1,4 @@
- class HinhAnhModel {
+class HinhAnhModel {
     maHinhAnh: number;
     tenHinhAnh?: string;
     laIcon?: boolean;
@@ -10,7 +10,7 @@
         tenHinhAnh: string,
         laIcon: boolean,
         duongDan: string,
-        duLieuAnh: string
+        duLieuAnh: string,
     ) {
         this.maHinhAnh = maHinhAnh;
         this.tenHinhAnh = tenHinhAnh;
