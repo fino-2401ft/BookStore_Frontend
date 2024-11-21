@@ -1,42 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { lay3SachMoiNhat, layToanBoSach } from "../../../api/SachAPI";
+import SachModel from "../../../models/SachModel";
+import CarouselItem from "./CarouselItem";
 
-const Carousel():React.FC = () => 
-{
+const Carousel: React.FC = () => {
     const [danhSachQuyenSach, setDanhSachQuyenSach] = useState<SachModel[]>([]);
-    const [dangTaiDuLieu, setDangTaiDuLieu] = useState<boolean>(true);
+    const [dangTaiDuLieu, setDangTaiDuLieu] = useState(true);
     const [baoLoi, setBaoLoi] = useState(null);
 
     useEffect(() => {
         lay3SachMoiNhat().then(
-            sachData => {
-                setDanhSachQuyenSach(sachData);
+            kq => {
+                setDanhSachQuyenSach(kq.ketQua);
                 setDangTaiDuLieu(false);
             }
         ).catch(
             error => {
+                setDangTaiDuLieu(false);
                 setBaoLoi(error.message);
             }
         );
-    }, [])
-    
-    if(dangTaiDuLieu) 
-    {
-        return(
+    }, [] // Chi goi mot lan
+    )
+
+    if (dangTaiDuLieu) {
+        return (
             <div>
-                <h1>LOADING DATA......</h1>
+                <h1>Đang tải dữ liệu</h1>
             </div>
         );
     }
-    
-    if(baoLoi) 
-        {
-            return(
-                <div>
-                    <h1>ERROR: {baoLoi}</h1>
-                </div>
-            );
-        }
+
+    if (baoLoi) {
+        return (
+            <div>
+                <h1>Gặp lỗi: {baoLoi}</h1>
+            </div>
+        );
+    }
 
 
     return (
@@ -44,37 +45,13 @@ const Carousel():React.FC = () =>
             <div id="carouselExampleDark" className="carousel carousel-dark slide">
                 <div className="carousel-inner">
                     <div className="carousel-item active" data-bs-interval="10000">
-                        <div className="row align-items-center">
-                            <div className="col-5 text-center">
-                                <img src={'./../../../images/books/1.jpg'} className="float-end" style={{width:'150px'}} alt='No img' />
-                            </div>
-                            <div className="col-7">
-                                <h5>First slide label</h5>
-                                <p>Some representative placeholder content for the first slide.</p>
-                            </div>
-                        </div>
+                        <CarouselItem key={0} sach={danhSachQuyenSach[0]} />
                     </div>
                     <div className="carousel-item " data-bs-interval="10000">
-                        <div className="row align-items-center">
-                            <div className="col-5 text-center">
-                                <img src={'./../../../images/books/2.jpg'} className="float-end" style={{width:'150px'}} />
-                            </div>
-                            <div className="col-7">
-                                <h5>First slide label</h5>
-                                <p>Some representative placeholder content for the first slide.</p>
-                            </div>
-                        </div>
+                        <CarouselItem key={1} sach={danhSachQuyenSach[1]} />
                     </div>
                     <div className="carousel-item " data-bs-interval="10000">
-                        <div className="row align-items-center">
-                            <div className="col-5 text-center">
-                                <img src={'./../../../images/books/3.jpg'} className="float-end" style={{width:'150px'}} />
-                            </div>
-                            <div className="col-7">
-                                <h5>First slide label</h5>
-                                <p>Some representative placeholder content for the first slide.</p>
-                            </div>
-                        </div>
+                        <CarouselItem key={2} sach={danhSachQuyenSach[2]} />
                     </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">

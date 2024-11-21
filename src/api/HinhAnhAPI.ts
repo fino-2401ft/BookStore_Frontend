@@ -3,11 +3,8 @@ import HinhAnhModel from "../models/HinhAnhModel";
 import { my_request } from "./my_request";
 
 
-export async function layToanBoAnhCuaMotSach(maSach: number): Promise<HinhAnhModel[]> {
+async function layAnhCuaMotSach(duongDan: string): Promise<HinhAnhModel[]> {
     const ketQua: HinhAnhModel[] = [];
-
-    // Xác định endpoint
-    const duongDan: string = `http://localhost:8080/sach/${maSach}/danhSachHinhAnh`;
 
     // Gọi phương thức request
     const response = await my_request(duongDan);
@@ -22,9 +19,25 @@ export async function layToanBoAnhCuaMotSach(maSach: number): Promise<HinhAnhMod
             tenHinhAnh: responseData[key].tenHinhAnh,
             laIcon: responseData[key].laIcon,
             duongDan: responseData[key].duongDan,
-            duLieuAnh: responseData[key].duLieuAnh
+            duLieuAnh: responseData[key].duLieuAnh,
         });
     }
 
     return ketQua;
 }
+
+
+export async function layToanBoAnhCuaMotSach(maSach: number): Promise<HinhAnhModel[]> {
+   // Xác định endpoint
+   const duongDan: string = `http://localhost:8080/sach/${maSach}/danhSachHinhAnh`;
+
+   return layAnhCuaMotSach(duongDan);
+}
+
+
+export async function lay1AnhCuaMotSach(maSach: number): Promise<HinhAnhModel[]> {
+    // Xác định endpoint
+    const duongDan: string = `http://localhost:8080/sach/${maSach}/danhSachHinhAnh?sort=maHinhAnh,asc&page=0&size=1`;
+ 
+    return layAnhCuaMotSach(duongDan);
+ }

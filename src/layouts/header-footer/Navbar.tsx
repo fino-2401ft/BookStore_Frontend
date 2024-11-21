@@ -1,7 +1,17 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
-function Navbar(){
-    return(
+interface NavbarProps {
+    tuKhoaTimKiem: string;
+    setTuKhoaTimKiem: (tuKhoa: string) => void;
+}
+
+function Navbar({ tuKhoaTimKiem, setTuKhoaTimKiem }: NavbarProps) {
+
+    const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setTuKhoaTimKiem(e.target.value);
+    }
+
+    return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
                 <a className="navbar-brand" href="#">Bookstore</a>
@@ -36,15 +46,15 @@ function Navbar(){
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">Liên hệ</a>
-                        </li>
+                        </li>a
                     </ul>
                 </div>
 
                 {/* Tìm kiếm */}
-                <form className="d-flex">
-                    <input className="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" />
+                <div className="d-flex">
+                    <input className="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" onChange={onSearchInputChange} value={tuKhoaTimKiem} />
                     <button className="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                </div>
 
                 {/* Biểu tượng giỏ hàng */}
                 <ul className="navbar-nav me-1">
